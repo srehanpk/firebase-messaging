@@ -7,7 +7,7 @@ function App() {
 
   const messaging = firebase.messaging();
 
-  messaging.requestPermission().then(()=>{
+  Notification.requestPermission().then(()=>{
     return messaging.getToken()
   }).then((token)=>{
     console.log(`token`, token);
