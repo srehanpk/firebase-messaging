@@ -11,6 +11,7 @@ function App() {
     return messaging.getToken()
   }).then((token)=>{
     console.log(`token`, token);
+    //alert("Token" + token)
   })
 
 
