@@ -12,13 +12,13 @@ function App() {
   }).then((token)=>{
     console.log(`token`, token);
     alert("Token" + token)
-    document.write(token);
+    //document.write(token);
   })
 
 
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <h1>Hello World from Rayhan Ahmed</h1>
     </div>
   );
 }
