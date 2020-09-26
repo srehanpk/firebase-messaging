@@ -1,17 +1,44 @@
-name: firebase Deploy
-on:
-  push:
-    branches:
-    - master
+name: CI
+
+on: [push]
+
 jobs:
-  main:
-    name: Build and Deploy
+  build:
+
     runs-on: ubuntu-latest
+
     steps:
-    - name: Deploy to Firebase
-      uses: doonstore/firebase-deploy@v1
-      with:
-        params: --only hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-        FIREBASE_PROJECT: firebase-messaging 
+    - uses: actions/checkout@v1
+    - name: Run a one-line script
+      run: echo Hello, world!
+    - name: Run a multi-line script
+      run: |
+        echo Add other actions to build,
+        echo test, and deploy your project.
+      jobs:
+          firebase-deploy:
+            on:
+              push:
+                branches:
+                - master
+                - release/*
+                - uses: actions/checkout@master
+                steps:
+                  - uses: actions/checkout@master
+                  - uses: actions/setup-node@master
+                    with:
+                      node-version: '10.x'
+                  - run: npm install
+                  - run: npm run build:prod
+                  steps:
+                    - uses: actions/checkout@master
+                    - uses: actions/setup-node@master
+                      with:
+                      node-version: '10.x'
+                    - run: npm install
+                    - run: npm run build:prod
+                    - uses: w9jds/firebase-action@master
+                      with:
+                        args: deploy --only hosting
+                      env:
+                        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
