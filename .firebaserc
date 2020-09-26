@@ -1,7 +1,6 @@
 {
   "projects": {
-    "default": "fir-messaging-1da67",
-    "firebase-messaging-github": "fir-messaging-1da67",
+     "fir-messaging-1da67",
     
   }
 }
