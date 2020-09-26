@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World from Rayhan Ahmed</h1>
+      <h1>Hello World from PIAIC</h1>
     </div>
   );
 }
