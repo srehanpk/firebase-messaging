@@ -1,25 +1,33 @@
-name: CI
+workflow "Build and Deploy" {
+  on = "push"
+  resolves = ["Deploy"]
+}
 
-on:
-  push:
-    branches:
-    - master
-    - release/*
 
-jobs:
-  firebase-deploy:
+action "Install" {
+  uses = "actions/npm@master"
+  args = "install"
+}
 
-    runs-on: ubuntu-latest
 
-    steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm run build:prod
-    - uses: w9jds/firebase-action@master
-      with:
-        args: deploy --only hosting
-      env:
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+action "Build" {
+  needs = "Install"
+  uses = "actions/npm@master"
+  args = "run build"
+}
+
+
+action "Deploy" {
+  needs = "Build"
+
+  uses = "w9jds/firebase-action@master"
+
+  args = "deploy --only hosting"
+
+  env = {
+    PROJECT_ID = "fir-hosting-a44ed"
+    PUBLIC_PATH = "build"
+  }
+
+  secrets = ["FIREBASE_TOKEN"]
+}
