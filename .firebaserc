@@ -2,6 +2,6 @@
   "projects": {
     "default": "fir-messaging-1da67",
     "firebase-messaging-github": "fir-messaging-1da67",
-    "depoly": "fir-messaging-1da67"
+    
   }
 }
