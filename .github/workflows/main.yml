@@ -1,4 +1,4 @@
-name: Customized Deploy
+name: firebase Deploy
 on:
   push:
     branches:
