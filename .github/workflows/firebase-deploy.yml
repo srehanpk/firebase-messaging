@@ -1,8 +1,8 @@
 name: Build and Deploy
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+    
 
 jobs:
   build:
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
       - name: Install Dependencies
         run: npm install
       - name: Install core-js@^3
